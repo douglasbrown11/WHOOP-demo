@@ -581,83 +581,6 @@
 </div>
 <div class="divider"></div>
 
-<!-- WHO ARE THE USERS -->
-<section id="users">
-  <div class="two-col">
-    <div>
-      <div class="section-label">Who uses Lunifer</div>
-      <h2 class="section-title">Health-driven sleepers who already wear WHOOP</h2>
-      <p class="section-body">Lunifer's users are students and working professionals who take sleep seriously. They already track recovery with WHOOP — Lunifer closes the loop by turning that recovery data into an alarm time that actually responds to it.</p>
-
-      <span class="tag">Students</span>
-      <span class="tag">Working professionals</span>
-      <span class="tag">Athletes</span>
-      <span class="tag">Remote workers</span>
-      <span class="tag">WHOOP subscribers</span>
-    </div>
-
-    <div>
-      <div class="section-label">The core problem</div>
-      <h2 class="section-title">Fixed alarms ignore what your body actually needs</h2>
-      <p class="section-body">Most alarm apps fire at the same time regardless of sleep quality, strain, or debt. A user who went to bed an hour late still gets woken at 7:00 AM as if nothing happened. Lunifer and WHOOP solve this together — WHOOP measures what the body needs, Lunifer acts on it.</p>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- UX FLOW -->
-<section id="flow">
-  <div class="section-label">User journey</div>
-  <h2 class="section-title">How WHOOP flows through Lunifer</h2>
-  <p class="section-body">WHOOP data touches Lunifer at three distinct moments — onboarding, nightly alarm calculation, and real-time adaptive rescheduling.</p>
-
-  <div class="flow">
-
-    <div class="flow-step">
-      <div class="step-num">1</div>
-      <div class="step-content">
-        <h3>Onboarding — connect your WHOOP</h3>
-        <p>During the sleep duration step of Lunifer's setup survey, users see a "Let my WHOOP decide" option alongside manual time entry. Tapping it launches WHOOP's OAuth 2.0 + PKCE authorization flow via <code>ASWebAuthenticationSession</code>. Once authorized, Lunifer fetches the user's personalized sleep need from the WHOOP API and stores it as their target sleep duration. The survey advances automatically.</p>
-      </div>
-    </div>
-
-    <div class="flow-step">
-      <div class="step-num">2</div>
-      <div class="step-content">
-        <h3>Nightly alarm calculation</h3>
-        <p>Each evening, Lunifer calculates tomorrow's alarm time using the formula: <em>alarm = bedtime + WHOOP sleep need</em>. If WHOOP says the user needs 8h 45m tonight (elevated strain, partial sleep debt), the alarm is set accordingly — not at a hardcoded 7:00 AM. The user sees "recommended to you via WHOOP" on their Sleep Insights card, making the source transparent.</p>
-      </div>
-    </div>
-
-    <div class="flow-step">
-      <div class="step-num">3</div>
-      <div class="step-content">
-        <h3>Adaptive rescheduling overnight</h3>
-        <p>If the user falls asleep later than their target bedtime, Lunifer's adaptive engine detects the sleep onset and pushes the alarm forward by the same delta — preserving the full WHOOP-recommended sleep duration. If they fall asleep early, the alarm pulls earlier. The WHOOP sleep need is the anchor for all of these adjustments.</p>
-      </div>
-    </div>
-
-    <div class="flow-step">
-      <div class="step-num">4</div>
-      <div class="step-content">
-        <h3>Morning — silent resync</h3>
-        <p>When the user opens Lunifer the next day, <code>WhoopManager.refreshIfNeeded()</code> silently fetches a fresh sleep need if the last sync was more than 12 hours ago. The Sleep Insights card updates automatically. No user action required.</p>
-      </div>
-    </div>
-
-    <div class="flow-step">
-      <div class="step-num">5</div>
-      <div class="step-content">
-        <h3>Settings — manage the connection</h3>
-        <p>Users can connect or disconnect WHOOP at any time from the Sleep &amp; Wearables screen in Settings. Disconnecting gracefully reverts the sleep recommendation to the user's manual setting or Lunifer's age-based estimate. The connection state is always visible.</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<div class="divider"></div>
 
 <!-- SCREENS -->
 <section id="screens">
@@ -809,6 +732,59 @@
             <span>sleep need: 8h 45m</span>
           </div>
         </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- UX FLOW -->
+<section id="flow">
+  <div class="section-label">User journey</div>
+  <h2 class="section-title">How WHOOP flows through Lunifer</h2>
+  <p class="section-body">WHOOP data touches Lunifer at three distinct moments — onboarding, nightly alarm calculation, and real-time adaptive rescheduling.</p>
+
+  <div class="flow">
+
+    <div class="flow-step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <h3>Onboarding — connect your WHOOP</h3>
+        <p>During the sleep duration step of Lunifer's setup survey, users see a "Let my WHOOP decide" option alongside manual time entry. Tapping it launches WHOOP's OAuth 2.0 + PKCE authorization flow via <code>ASWebAuthenticationSession</code>. Once authorized, Lunifer fetches the user's personalized sleep need from the WHOOP API and stores it as their target sleep duration. The survey advances automatically.</p>
+      </div>
+    </div>
+
+    <div class="flow-step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <h3>Nightly alarm calculation</h3>
+        <p>Each evening, Lunifer calculates tomorrow's alarm time using the formula: <em>alarm = bedtime + WHOOP sleep need</em>. If WHOOP says the user needs 8h 45m tonight (elevated strain, partial sleep debt), the alarm is set accordingly — not at a hardcoded 7:00 AM. The user sees "recommended to you via WHOOP" on their Sleep Insights card, making the source transparent.</p>
+      </div>
+    </div>
+
+    <div class="flow-step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <h3>Adaptive rescheduling overnight</h3>
+        <p>If the user falls asleep later than their target bedtime, Lunifer's adaptive engine detects the sleep onset and pushes the alarm forward by the same delta — preserving the full WHOOP-recommended sleep duration. If they fall asleep early, the alarm pulls earlier. The WHOOP sleep need is the anchor for all of these adjustments.</p>
+      </div>
+    </div>
+
+    <div class="flow-step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <h3>Morning — silent resync</h3>
+        <p>When the user opens Lunifer the next day, <code>WhoopManager.refreshIfNeeded()</code> silently fetches a fresh sleep need if the last sync was more than 12 hours ago. The Sleep Insights card updates automatically. No user action required.</p>
+      </div>
+    </div>
+
+    <div class="flow-step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <h3>Settings — manage the connection</h3>
+        <p>Users can connect or disconnect WHOOP at any time from the Sleep &amp; Wearables screen in Settings. Disconnecting gracefully reverts the sleep recommendation to the user's manual setting or Lunifer's age-based estimate. The connection state is always visible.</p>
       </div>
     </div>
 
